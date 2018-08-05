@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/NachbarStrom/public-python-nachbarstrom-commons.svg?branch=master)](https://travis-ci.org/NachbarStrom/public-python-nachbarstrom-commons)
+
 # python-nachbarstrom-commons
 Library of common python utils used by different NachbarStrom services
 
