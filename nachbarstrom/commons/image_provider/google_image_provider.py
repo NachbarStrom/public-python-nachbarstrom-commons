@@ -6,6 +6,8 @@ from PIL import Image
 from nachbarstrom.commons.world import Location
 from .image_provider import ImageProvider
 
+GOOGLE_MAPS_KEY = os.environ["GOOGLE_MAPS_KEY"]
+
 
 class GoogleImageProvider(ImageProvider):
     """Not thread-safe"""
@@ -36,7 +38,7 @@ class GoogleImageProvider(ImageProvider):
 
     def _fill_url(self, location: Location):
         return self._request_url.format(
-            api_key=os.environ["GOOGLE_MAPS_KEY"],
+            api_key=GOOGLE_MAPS_KEY,
             latitude=location.latitude,
             longitude=location.longitude,
             size=self._size,

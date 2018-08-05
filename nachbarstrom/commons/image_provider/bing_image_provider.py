@@ -6,6 +6,8 @@ from PIL import Image
 from nachbarstrom.commons.world import Location, SquareAroundCenterLocation
 from .image_provider import ImageProvider
 
+BING_MAPS_KEY = os.environ["BING_MAPS_KEY"]
+
 
 class BingImageProvider(ImageProvider):
     _QUERY_TEMPLATE = "https://dev.virtualearth.net/REST/v1/" \
@@ -28,7 +30,7 @@ class BingImageProvider(ImageProvider):
 
     def _format_query(self, location: Location) -> str:
         params = {
-            "bing_maps_key": os.environ["BING_MAPS_KEY"],
+            "bing_maps_key": BING_MAPS_KEY,
             "lat": self._get_float_string(location.latitude),
             "lon": self._get_float_string(location.longitude),
             "size": self._size,
