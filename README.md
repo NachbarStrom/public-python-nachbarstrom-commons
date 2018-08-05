@@ -9,7 +9,7 @@ pip install .
 # Usage
 Set your api key as an environment variable
 ````bash
-$ export GOOGLE_API_KEY='your key here'
+$ export GOOGLE_MAPS_KEY='your key here'
 ````
 Example:
 ````python
