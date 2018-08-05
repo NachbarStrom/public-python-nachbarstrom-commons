@@ -11,4 +11,4 @@ ignore_errors = True
 omit =
     conftest.py
     setup.py
-    "**/test_*.py"
+    **/tests/**
