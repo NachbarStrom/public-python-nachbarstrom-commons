@@ -1,0 +1,7 @@
+language: python
+python: "3.6"
+before_install:
+  - export GOOGLE_MAPS_KEY=placeholder
+  - export BING_MAPS_KEY=placeholder
+install: pip install pytest
+script: pytest
