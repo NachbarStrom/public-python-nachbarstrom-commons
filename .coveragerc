@@ -1,0 +1,14 @@
+[run]
+branch = True
+source = nachbarstrom
+
+[report]
+exclude_lines =
+    raise NotImplementedError
+    if __name__ == .__main__.:
+ignore_errors = True
+
+omit =
+    conftest.py
+    setup.py
+    test_*.py
