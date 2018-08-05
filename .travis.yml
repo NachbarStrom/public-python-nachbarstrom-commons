@@ -5,3 +5,4 @@ before_install:
   - export BING_MAPS_KEY=placeholder
 install: pip install -r requirements.txt
 script: pytest
+after_success: codecov
