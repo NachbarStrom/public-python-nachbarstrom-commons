@@ -1,3 +1,4 @@
+from PIL.Image import new as new_image
 from PIL.Image import Image
 
 from nachbarstrom.commons.world import Location
@@ -26,6 +27,6 @@ class ImageProvider:
 class MockImageProvider(ImageProvider):
     def get_image_from(self, location: Location) -> Image:
         self._validate_input_format(location)
-        image = Image()
-        self._validate_output_format(image)
-        return image
+        mock_img = new_image("RGB", (10, 10))
+        self._validate_output_format(mock_img)
+        return mock_img
