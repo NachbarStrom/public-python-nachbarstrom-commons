@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/NachbarStrom/public-python-nachbarstrom-commons.svg?branch=master)](https://travis-ci.org/NachbarStrom/public-python-nachbarstrom-commons)
+[![codecov](https://codecov.io/gh/NachbarStrom/public-python-nachbarstrom-commons/branch/master/graph/badge.svg)](https://codecov.io/gh/NachbarStrom/public-python-nachbarstrom-commons)
 
 # python-nachbarstrom-commons
 Library of common python utils used by different NachbarStrom services
