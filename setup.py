@@ -7,4 +7,5 @@ setup(
         "nachbarstrom.commons.image_provider",
         "nachbarstrom.commons.world",
     ],
+    install_requires="Pillow",
 )
