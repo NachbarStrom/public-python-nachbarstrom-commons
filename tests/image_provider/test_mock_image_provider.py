@@ -1,8 +1,8 @@
 import pytest
 from PIL.Image import Image
 
+from nachbarstrom.commons.image_provider import MockImageProvider
 from nachbarstrom.commons.world import Location
-from .. import MockImageProvider
 
 
 @pytest.fixture

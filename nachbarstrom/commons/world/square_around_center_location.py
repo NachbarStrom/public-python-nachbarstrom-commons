@@ -4,7 +4,7 @@ from .location import Location
 
 
 class SquareAroundCenterLocation:
-    def __init__(self, center: Location, side_length_in_miles: float=0.005):
+    def __init__(self, center: Location, side_length_in_miles: float = 0.005):
         assert isinstance(center, Location)
         assert isinstance(side_length_in_miles, float)
         self._center = center
@@ -15,13 +15,13 @@ class SquareAroundCenterLocation:
         delta_lat = self._side_length_in_miles / 69
         delta_lon = self._get_delta_lon(delta_lat)
 
-        up = self._center.latitude + delta_lat
-        down = self._center.latitude - delta_lat
+        top = self._center.latitude + delta_lat
+        bottom = self._center.latitude - delta_lat
         right = self._center.longitude + delta_lon
         left = self._center.longitude - delta_lon
 
-        self.bottom_left_location = Location(down, left)
-        self.upper_right_location = Location(up, right)
+        self.bottom_left_location = Location(bottom, left)
+        self.upper_right_location = Location(top, right)
 
     def _get_delta_lon(self, delta_lat):
         center_lat_in_rad = self._center.latitude / (2 * pi)

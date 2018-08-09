@@ -10,16 +10,12 @@ class Location:
         latitude = float(latitude)
         longitude = float(longitude)
 
-        self._validate_range(latitude, longitude)
-
-        self.longitude = float(longitude)
-        self.latitude = float(latitude)
-
-    @staticmethod
-    def _validate_range(latitude, longitude):
         # Bounds according to https://goo.gl/EKrCLt
         assert -85.05115 <= latitude <= 85
         assert -180 <= longitude <= 180
+
+        self.longitude = longitude
+        self.latitude = latitude
 
     @staticmethod
     def from_dict(coordinates: Dict):
@@ -33,4 +29,3 @@ class Location:
         assert "lon" in coordinates
         return Location(latitude=coordinates["lat"],
                         longitude=coordinates["lon"])
-

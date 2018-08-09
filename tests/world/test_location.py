@@ -1,6 +1,6 @@
 import pytest
 
-from .. import Location
+from nachbarstrom.commons.world import Location
 
 
 def test_constructor_rejects_invalid_input():

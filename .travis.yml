@@ -4,5 +4,5 @@ before_install:
   - export GOOGLE_MAPS_KEY=placeholder
   - export BING_MAPS_KEY=placeholder
 install: pip install -r requirements.txt
-script: pytest --cov=./
+script: pytest --pylint --cov=./
 after_success: codecov

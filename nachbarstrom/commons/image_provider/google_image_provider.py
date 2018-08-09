@@ -11,19 +11,21 @@ GOOGLE_MAPS_KEY = os.environ["GOOGLE_MAPS_KEY"]
 
 class GoogleImageProvider(ImageProvider):
     """Not thread-safe"""
+    MIN_ZOOM = 0
+    MAX_ZOOM = 21
+    MAX_IMG_SIZE = 640
 
-    def __init__(self, zoom: int=18, size: int=400) -> None:
-        assert isinstance(zoom, int)
-        assert isinstance(size, int)
-        self._zoom = zoom
-        self._size = size
+    def __init__(self, zoom: int = MAX_ZOOM, size: int = MAX_IMG_SIZE,
+                 api_key: str = GOOGLE_MAPS_KEY) -> None:
+        assert self.MIN_ZOOM <= zoom <= self.MAX_ZOOM
+        assert size <= self.MAX_IMG_SIZE
         self._image = None
         self._request_url = "https://maps.googleapis.com/maps/api/staticmap?" \
                             "maptype=satellite" \
                             "&center={latitude:f},{longitude:f}" \
-                            "&zoom={zoom}" \
-                            "&size={size}x{size}" \
-                            "&key={api_key}"
+                            f"&zoom={zoom}" \
+                            f"&size={size}x{size}" \
+                            f"&key={api_key}"
 
     def get_image_from(self, location: Location) -> Image.Image:
         self._validate_input_format(location)
@@ -38,9 +40,6 @@ class GoogleImageProvider(ImageProvider):
 
     def _fill_url(self, location: Location):
         return self._request_url.format(
-            api_key=GOOGLE_MAPS_KEY,
             latitude=location.latitude,
             longitude=location.longitude,
-            size=self._size,
-            zoom=self._zoom,
         )

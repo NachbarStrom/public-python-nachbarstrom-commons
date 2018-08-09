@@ -18,7 +18,7 @@ class BingImageProvider(ImageProvider):
                       "&key={bing_maps_key}"
     _FLOAT_FORMAT = "{:.6f}"
 
-    def __init__(self, size: int=400):
+    def __init__(self, size: int = 400):
         self._size = size
 
     def get_image_from(self, location: Location) -> Image:

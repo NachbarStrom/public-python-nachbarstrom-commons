@@ -4,11 +4,11 @@ from typing import Sequence
 import pytest
 from PIL.Image import Image
 
+from nachbarstrom.commons.image_provider import ImageProvider, \
+    GoogleImageProvider, BingImageProvider
 from nachbarstrom.commons.world import Location
-from .. import ImageProvider
-from .. import BingImageProvider, GoogleImageProvider
 
-germany_location = Location(latitude=48.0, longitude=11.0)
+GERMANY_LOCATION = Location(latitude=48.0, longitude=11.0)
 
 
 @pytest.fixture
@@ -28,7 +28,7 @@ def test_validation_rejects_invalid_input(
 @pytest.mark.integration
 def test_output_is_pillow_image(image_providers: Sequence[ImageProvider]):
     for provider in image_providers:
-        image = provider.get_image_from(germany_location)
+        image = provider.get_image_from(GERMANY_LOCATION)
         assert isinstance(image, Image)
 
 

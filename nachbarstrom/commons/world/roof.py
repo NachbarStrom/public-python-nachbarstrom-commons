@@ -35,7 +35,7 @@ class Roof:
         assert isinstance(roof_type, RoofType)
         assert isinstance(orientation, RoofOrientation)
         area = float(area)
-        assert 0 <= area
+        assert area >= 0
 
     def serialize(self):
         return {
