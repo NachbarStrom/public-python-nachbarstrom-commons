@@ -1,5 +1,7 @@
 from enum import Enum
 
+import math
+
 
 class RoofType(Enum):
     flat = 0
@@ -43,3 +45,29 @@ class Roof:
             "orientation": self.orientation.name,
             "area": str(self.area)
         }
+
+    @staticmethod
+    def from_dict(roof_details: dict):
+        """
+        Deserialize a Roof from a dict of the form:
+        {
+            "area: "100.00"
+            "roofType": "hipped",
+            "orientation": "SouthEast",
+        }
+        :param roof_details: the dict with the details
+        :return: A Roof instance
+        """
+        assert "area" in roof_details
+        assert "roofType" in roof_details
+        assert "orientation" in roof_details
+        return Roof(
+            roof_type=RoofType[roof_details["roofType"]],
+            orientation=RoofOrientation[roof_details["orientation"]],
+            area=roof_details["area"],
+        )
+
+    def __eq__(self, other):
+        return (self.type == other.type and
+                self.orientation == other.orientation and
+                math.isclose(self.area, other.area, rel_tol=1e-10))
