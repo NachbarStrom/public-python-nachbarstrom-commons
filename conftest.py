@@ -3,13 +3,17 @@ import pytest
 
 def pytest_addoption(parser):
     parser.addoption("--integration", action="store_true",
-                     default=False, help="run integration tests")
+                     default=False, help="run integration tests.")
     parser.addoption("--ip", action="store", default=False,
                      help="Specify the ip of the server to run the integration "
                           "test against.")
+    parser.addoption("--all", action="store_true", default=False,
+                     help="run both unit and integration tests.")
 
 
 def pytest_collection_modifyitems(config, items):
+    if config.getoption("--all"):
+        return
     collected_tests = items
     if config.getoption("--integration"):
         _run_only_integration_tests(collected_tests)
