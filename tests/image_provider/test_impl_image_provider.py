@@ -8,7 +8,7 @@ from nachbarstrom.commons.image_provider import ImageProvider, \
     GoogleImageProvider, BingImageProvider
 from nachbarstrom.commons.world import Location
 
-GERMANY_LOCATION = Location(latitude=48.0, longitude=11.0)
+GERMANY_LOCATION = Location(48.193926, 11.621544)
 
 
 @pytest.fixture
@@ -43,8 +43,8 @@ def test_multiple_images_are_different(image_providers: Sequence[ImageProvider])
 def _fetch_multiple_images(provider: ImageProvider):
     images = []
     for num in range(3):
-        latitude = 48.0 + num
-        location = Location(latitude, longitude=11.0)
+        latitude = GERMANY_LOCATION.latitude + 0.01 * num
+        location = Location(latitude, GERMANY_LOCATION.longitude)
         image = provider.get_image_from(location)
         images.append(image)
     return images
