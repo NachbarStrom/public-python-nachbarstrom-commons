@@ -7,8 +7,6 @@ from PIL import Image
 from nachbarstrom.commons.world import Location
 from .image_provider import ImageProvider
 
-GOOGLE_MAPS_KEY = os.environ["GOOGLE_MAPS_KEY"]
-
 
 class MapType(Enum):
     roadmap = auto()
@@ -27,10 +25,14 @@ class GoogleImageProvider(ImageProvider):
             self,
             zoom: int = MAX_ZOOM,
             size: int = MAX_IMG_SIZE,
-            api_key: str = GOOGLE_MAPS_KEY,
+            api_key: str = None,
             map_type: MapType = MapType.satellite) -> None:
+
         assert self.MIN_ZOOM <= zoom <= self.MAX_ZOOM
         assert size <= self.MAX_IMG_SIZE
+
+        if api_key is None:
+            api_key = os.environ["GOOGLE_MAPS_KEY"]
         self._image = None
         self._request_url = "https://maps.googleapis.com/maps/api/staticmap?" \
                             f"maptype={map_type.name}" \
