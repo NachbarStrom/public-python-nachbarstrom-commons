@@ -2,21 +2,21 @@ from enum import Enum
 
 
 class RoofType(Enum):
-    FLAT = 1
-    GABLED = 2
-    HALF_HIPPED = 3
-    HIPPED = 4
-    MANSARD = 5
-    PYRAMID = 6
-    ROUND = 7
+    flat = 0
+    gabled = 1
+    halfHipped = 2
+    hipped = 3
+    mansard = 4
+    pyramid = 5
+    round = 6
 
 
 class RoofOrientation(Enum):
-    EAST = 1
-    EAST_SOUTH = 2
-    SOUTH = 3
-    SOUTH_WEST = 4
-    WEST = 5
+    East = 0
+    SouthEast = 1
+    South = 2
+    SouthWest = 3
+    West = 4
 
 
 class Roof:
