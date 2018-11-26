@@ -5,6 +5,7 @@
 Library of common python utils used by different NachbarStrom services
 
 # Installation
+Make sure to install on a Python 3.6 environment.
 ````bash
 cd python-nachbarstrom-commons
 pip install .
@@ -14,12 +15,7 @@ Set your api key as an environment variable
 ````bash
 $ export GOOGLE_MAPS_KEY='your key here'
 ````
-Example:
-````python
-from nachbarstrom.commons.world import Location
-from nachbarstrom.commons.image_provider import GoogleImageProvider
-
-germany_location = Location(latitude=48.0, longitude=11.0)
-img_provider = GoogleImageProvider()
-satellite_img = img_provider.get_image_from(germany_location)
-````
+Run the example script. It will generate an `img.png`.
+```bash
+python example.py
+```
