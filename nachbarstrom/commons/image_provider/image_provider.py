@@ -1,4 +1,5 @@
 from PIL import Image
+from typeguard import typechecked
 
 from nachbarstrom.commons.world import Location
 
@@ -14,18 +15,9 @@ class ImageProvider:
         """
         raise NotImplementedError
 
-    @staticmethod
-    def _validate_input_format(location):
-        assert isinstance(location, Location)
-
-    @staticmethod
-    def _validate_output_format(image):
-        assert isinstance(image, Image.Image)
-
 
 class MockImageProvider(ImageProvider):
+
+    @typechecked
     def get_image_from(self, location: Location) -> Image:
-        self._validate_input_format(location)
-        mock_img = Image.new("RGB", (10, 10))
-        self._validate_output_format(mock_img)
-        return mock_img
+        return Image.new("RGB", (10, 10))

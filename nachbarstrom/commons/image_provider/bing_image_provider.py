@@ -2,6 +2,7 @@ import os
 from urllib import request
 
 from PIL import Image
+from typeguard import typechecked
 
 from nachbarstrom.commons.world import Location
 from .image_provider import ImageProvider
@@ -15,6 +16,7 @@ class BingImageProvider(ImageProvider):
     MAX_IMG_ZOOM = 21
     DEFAULT_IMG_ZOOM = MAX_IMG_ZOOM - 1  # Bing doesn't automatically
     # fallback to the next available size, so we have to be defensive.
+    _API_KEY_ENV_VAR = "BING_MAPS_KEY"
 
     def __init__(
             self,
@@ -27,7 +29,7 @@ class BingImageProvider(ImageProvider):
         assert isinstance(zoom, int)
 
         if api_key is None:
-            api_key = os.environ["BING_MAPS_KEY"]
+            api_key = self._get_api_key()
 
         self._img_size = size
         self._query_template = "https://dev.virtualearth.net/REST/v1/" \
@@ -38,12 +40,16 @@ class BingImageProvider(ImageProvider):
                                "&dpi=Large" \
                                f"&key={api_key}"
 
+    def _get_api_key(self):
+        assert self._API_KEY_ENV_VAR in os.environ, \
+            f"The environment variable '{self._API_KEY_ENV_VAR}' is not set!"
+        return os.environ[self._API_KEY_ENV_VAR]
+
+    @typechecked
     def get_image_from(self, location: Location) -> Image.Image:
-        self._validate_input_format(location)
         query = self._format_query(location)
-        image = self._upsample_img_middle(Image.open(request.urlopen(query)))
-        self._validate_output_format(image)
-        return image
+        image = Image.open(request.urlopen(query))
+        return self._upsample_img_middle(image)
 
     def _format_query(self, location: Location) -> str:
         return self._query_template.format(

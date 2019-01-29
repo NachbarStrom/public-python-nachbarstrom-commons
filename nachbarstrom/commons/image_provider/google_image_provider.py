@@ -3,6 +3,7 @@ from enum import Enum, auto
 from urllib import request
 from io import BytesIO
 from PIL import Image
+from typeguard import typechecked
 
 from nachbarstrom.commons.world import Location
 from .image_provider import ImageProvider
@@ -41,10 +42,9 @@ class GoogleImageProvider(ImageProvider):
                             f"&size={size}x{size}" \
                             f"&key={api_key}"
 
+    @typechecked
     def get_image_from(self, location: Location) -> Image.Image:
-        self._validate_input_format(location)
         self._get_image(location)
-        self._validate_output_format(self._image)
         return self._image
 
     def _get_image(self, location):
